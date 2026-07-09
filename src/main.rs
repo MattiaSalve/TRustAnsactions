@@ -11,6 +11,7 @@ use tower_http::services::ServeDir;
 async fn main() {
     // let transactions = Transactions::from_csv("data/transactions.csv");
     let app = Router::new()
+        .route("/", get(apis::get_transactions))
         .route("/api/transactions/upload", post(apis::upload_csv))
         .route("/api/transactions", get(apis::get_transactions))
         .fallback_service(ServeDir::new("frontend"));
